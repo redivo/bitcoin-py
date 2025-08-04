@@ -274,5 +274,16 @@ def test_get_entropy_checksum():
 
 ####################################################################################################
 
-def test_generate_random_words_list():
-    pass
+def test_generate_sentence_from_entropy():
+    # Load word list
+    bip39.load_wordlist()
+
+    # Load test vector
+    test_vector = get_test_vector()
+
+    # Iterate over all sentences
+    for sentence in test_vector:
+        num_of_words = len(sentence[2].split(' '))
+        # Verify that function convert entropy to sentence correctly
+        assert bip39.generate_sentence_from_entropy(int(sentence[0], 16), num_of_words) \
+                == sentence[2].split(' ')
